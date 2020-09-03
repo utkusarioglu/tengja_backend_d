@@ -4,15 +4,22 @@ import path from 'path';
 import cookieParser from 'cookie-parser';
 import logger from 'morgan';
 import cors from 'cors';
+import expressWs from 'express-ws';
+
+const { app, getWss, applyTo } = expressWs(express());
 
 import indexRouter from './routes/index';
-import apiRouter from './routes/api';
+import restRouter from './routes/rest';
+import websocketRouter from './routes/websocket';
 
-const app = express();
+
 
 // // view engine setup
 // app.set("views", path.join(__dirname, "views"));
 // app.set("view engine", "jade");
+
+
+
 
 app.use(cors());
 app.use(logger("dev"));
@@ -22,13 +29,13 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
 app.use("/", indexRouter);
-app.use("/api", apiRouter);
+app.use("/rest", restRouter);
+app.use("/ws", websocketRouter);
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
     next(createError(404));
 });
-
 // // error handler
 // app.use((err, req, res, next) => {
 //     // set locals, only providing error in development
@@ -40,8 +47,10 @@ app.use((req, res, next) => {
 //     res.render("error");
 // });
 
-app.listen(4000, () => {
-    console.log("should be listening now");
+const PORT = 4000;
+app.listen(PORT, () => {
+    console.log(`Server is listening on: ${PORT}`);
 });
+
 
 export default app;
