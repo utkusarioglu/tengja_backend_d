@@ -1,2 +1,2 @@
 # tengja_backend_d
-Backend dev code for tengja 
+Backend dev code for tengja project
