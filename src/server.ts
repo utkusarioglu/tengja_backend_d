@@ -5,6 +5,7 @@ import cookieParser from 'cookie-parser';
 import logger from 'morgan';
 import cors from 'cors';
 import expressWs from 'express-ws';
+import session from 'express-session';
 
 const { app, getWss, applyTo } = expressWs(express());
 
@@ -27,6 +28,18 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
+app.use(session({
+    secret: ['veryimportantsecret'],  
+    name: "secretname",
+    cookie: {
+        httpOnly: false,
+        secure: false,
+        sameSite: false,
+        maxAge: 600000 // Time is in miliseconds
+    },
+    saveUninitialized: false,
+    resave: false,
+}));
 
 app.use("/", indexRouter);
 app.use("/rest", restRouter);
