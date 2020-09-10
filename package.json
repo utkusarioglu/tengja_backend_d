@@ -7,14 +7,18 @@
   "author": "Utku Sarioglu <utkusarioglu@hotmail.com>",
   "license": "MIT",
   "dependencies": {
+    "@types/connect-redis": "^0.0.14",
     "@types/express-session": "^1.17.0",
+    "@types/redis": "^2.8.27",
+    "connect-redis": "^5.0.0",
     "cookie-parser": "^1.4.5",
     "cors": "^2.8.5",
     "express": "^4.17.1",
     "express-session": "^1.17.1",
     "express-ws": "^4.0.0",
     "http-errors": "^1.8.0",
-    "morgan": "^1.10.0"
+    "morgan": "^1.10.0",
+    "redis": "^3.0.2"
   },
   "devDependencies": {
     "@types/cookie-parser": "^1.4.2",

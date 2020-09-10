@@ -6,21 +6,20 @@ import logger from 'morgan';
 import cors from 'cors';
 import expressWs from 'express-ws';
 import session from 'express-session';
+import redis from './redis';
+import redisStore from 'connect-redis';
+
+redis.setNewPlayer({
+    id: 'utku',
+    name: 'banana',
+})
 
 const { app, getWss, applyTo } = expressWs(express());
+const redisStoreSession = redisStore(session);
 
 import indexRouter from './routes/index';
 import restRouter from './routes/rest';
 import websocketRouter from './routes/websocket';
-
-
-
-// // view engine setup
-// app.set("views", path.join(__dirname, "views"));
-// app.set("view engine", "jade");
-
-
-
 
 app.use(cors());
 app.use(logger("dev"));
@@ -37,6 +36,7 @@ app.use(session({
         sameSite: false,
         maxAge: 600000 // Time is in miliseconds
     },
+    store: new redisStoreSession({ host: 'redis', port: 6379, client: redis.getClient()}),
     saveUninitialized: false,
     resave: false,
 }));
