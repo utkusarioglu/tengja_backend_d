@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from "express";
 import db from "../models";
-import { ERROR_CODES } from "../constants";
+import { ERROR_CODES } from "tengja_shared_d";
 
 const { ROLES, User } = db;
 

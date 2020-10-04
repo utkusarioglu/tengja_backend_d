@@ -2,7 +2,8 @@ import { Request, Response, NextFunction } from "express";
 import jwt from "jsonwebtoken";
 import AUTH_CONFIG from "../config/auth.config";
 import { User } from "../models";
-import { ROLES, ERROR_CODES } from "../constants";
+import { ROLES } from "../constants";
+import { ERROR_CODES } from "tengja_shared_d";
 
 export interface AuthenticatedRequest {
   userId: number;

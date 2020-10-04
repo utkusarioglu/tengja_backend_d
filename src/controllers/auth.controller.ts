@@ -3,7 +3,7 @@ import db, { User, Role, Op } from "../models";
 import AUTH_CONFIG from "../config/auth.config";
 import jwt from "jsonwebtoken";
 import bcrypt from "bcryptjs";
-import { ERROR_CODES, RESPONSE_CODES } from "../constants";
+import { ERROR_CODES, RESPONSE_CODES } from "tengja_shared_d";
 import { RoleAttributes } from "../models/role.model";
 
 interface UserSignup {
