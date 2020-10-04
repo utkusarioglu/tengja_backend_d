@@ -1,4 +1,4 @@
-export const enum PRIVILEGE_LEVELS {
+export const enum ROLES {
   admin,
   moderator,
   user,

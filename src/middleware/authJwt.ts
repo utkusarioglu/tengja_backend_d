@@ -2,7 +2,7 @@ import { Request, Response, NextFunction } from "express";
 import jwt from "jsonwebtoken";
 import AUTH_CONFIG from "../config/auth.config";
 import { User } from "../models";
-import { PRIVILEGE_LEVELS, ERROR_CODES } from "../constants";
+import { ROLES, ERROR_CODES } from "../constants";
 
 export interface AuthenticatedRequest {
   userId: number;
@@ -44,7 +44,7 @@ const isAdmin = (
   User.findByPk(req.userId).then((user) => {
     user?.getRoles().then((roles) => {
       roles.forEach((role) => {
-        if (role.name === PRIVILEGE_LEVELS.admin) {
+        if (role.name === ROLES.admin) {
           next();
           return;
         }
@@ -64,7 +64,7 @@ const isModerator = (
   User.findByPk(req.userId).then((user) => {
     user?.getRoles().then((roles) => {
       roles.forEach((role) => {
-        if (role.name === PRIVILEGE_LEVELS.moderator) {
+        if (role.name === ROLES.moderator) {
           next();
           return;
         }
@@ -81,7 +81,7 @@ const isModeratorOrAdmin = (
   res: Response,
   next: NextFunction
 ) => {
-  const { admin, moderator } = PRIVILEGE_LEVELS;
+  const { admin, moderator } = ROLES;
   User.findByPk(req.userId).then((user) => {
     user?.getRoles().then((roles) => {
       roles

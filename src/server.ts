@@ -9,7 +9,7 @@ import expressWs from "express-ws";
 import session from "express-session";
 // import redis from "./redis";
 import db from "./models";
-import { PRIVILEGE_LEVELS } from "./constants";
+import { ROLES } from "./constants";
 
 const { NODE_ENV } = process.env;
 const { app } = expressWs(express());
@@ -28,17 +28,17 @@ if (NODE_ENV === "development") {
   function initial() {
     Role.create({
       id: 1,
-      name: PRIVILEGE_LEVELS.user,
+      name: ROLES.user,
     });
 
     Role.create({
       id: 2,
-      name: PRIVILEGE_LEVELS.moderator,
+      name: ROLES.moderator,
     });
 
     Role.create({
       id: 3,
-      name: PRIVILEGE_LEVELS.admin,
+      name: ROLES.admin,
     });
   }
 } else {

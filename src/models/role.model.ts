@@ -1,8 +1,9 @@
 import { Sequelize, DataTypes, Model, Optional } from "sequelize";
+import { ROLES } from "../constants";
 
 export interface RoleAttributes {
   id?: number;
-  name: string;
+  name: ROLES;
   createdAt?: Date;
   updatedAt?: Date;
 }
@@ -14,7 +15,7 @@ export class Role
   extends Model<RoleAttributes, RoleCreationAttributes>
   implements RoleAttributes {
   public id!: number;
-  public name!: string;
+  public name!: ROLES;
   public readonly createdAt!: Date;
   public readonly updatedAt!: Date;
 }
